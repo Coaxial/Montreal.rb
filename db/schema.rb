@@ -11,17 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125005902) do
+ActiveRecord::Schema.define(version: 20151125011825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "address"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "company_translations", force: :cascade do |t|
     t.integer  "company_id",  null: false
     t.string   "locale",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.text     "description"
   end
 
@@ -31,8 +38,8 @@ ActiveRecord::Schema.define(version: 20151125005902) do
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",     null: false
     t.string   "locale",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "title"
     t.text     "introduction"
     t.text     "conclusion"
@@ -52,20 +59,11 @@ ActiveRecord::Schema.define(version: 20151125005902) do
   add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["starts_at"], name: "index_events_on_starts_at", using: :btree
 
-  create_table "jobs", force: :cascade do |t|
-    t.string   "state"
-    t.string   "title"
-    t.text     "description"
-    t.integer  "organization_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "location_translations", force: :cascade do |t|
     t.integer  "location_id", null: false
     t.string   "locale",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.text     "description"
     t.text     "directions"
   end
@@ -81,10 +79,30 @@ ActiveRecord::Schema.define(version: 20151125005902) do
     t.datetime "updated_at"
   end
 
-  create_table "organizations", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "address"
-    t.string   "logo"
+  create_table "news_item_translations", force: :cascade do |t|
+    t.integer  "news_item_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "title"
+    t.string   "state"
+    t.text     "body"
+  end
+
+  add_index "news_item_translations", ["locale"], name: "index_news_item_translations_on_locale", using: :btree
+  add_index "news_item_translations", ["news_item_id"], name: "index_news_item_translations_on_news_item_id", using: :btree
+
+  create_table "news_items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "talks", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "bio"
+    t.string   "slides"
+    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,9 +120,20 @@ ActiveRecord::Schema.define(version: 20151125005902) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "bio"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
 
 end

@@ -15,7 +15,8 @@ class EventDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     title: Field::String,
     introduction: Field::Text,
-    conclusion: Field::Text
+    conclusion: Field::Text,
+    type: Field::String
   }
 
   # COLLECTION_ATTRIBUTES
@@ -28,6 +29,7 @@ class EventDashboard < Administrate::BaseDashboard
     :title,
     :starts_at,
     :location,
+    :type
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -43,6 +45,7 @@ class EventDashboard < Administrate::BaseDashboard
     :conclusion,
     :starts_at,
     :location,
+    :type
   ]
 
   # Overwrite this method to customize how events are displayed
