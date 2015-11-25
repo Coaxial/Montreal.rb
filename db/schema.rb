@@ -15,23 +15,13 @@ ActiveRecord::Schema.define(version: 20151125011825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "company_translations", force: :cascade do |t|
-    t.integer  "company_id",  null: false
-    t.string   "locale",      null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "description"
-  end
-
-  add_index "company_translations", ["company_id"], name: "index_company_translations_on_company_id", using: :btree
-  add_index "company_translations", ["locale"], name: "index_company_translations_on_locale", using: :btree
+  enable_extension "hstore"
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",     null: false
     t.string   "locale",       null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "title"
     t.text     "introduction"
     t.text     "conclusion"
@@ -50,11 +40,20 @@ ActiveRecord::Schema.define(version: 20151125011825) do
   add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["starts_at"], name: "index_events_on_starts_at", using: :btree
 
+  create_table "jobs", force: :cascade do |t|
+    t.string   "state"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "location_translations", force: :cascade do |t|
     t.integer  "location_id", null: false
     t.string   "locale",      null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "description"
     t.text     "directions"
   end
@@ -70,6 +69,7 @@ ActiveRecord::Schema.define(version: 20151125011825) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "news_items", force: :cascade do |t|
     t.string   "state"
     t.datetime "published_at"
@@ -79,6 +79,19 @@ ActiveRecord::Schema.define(version: 20151125011825) do
     t.datetime "updated_at",   null: false
   end
 
+=======
+  create_table "organization_translations", force: :cascade do |t|
+    t.integer  "organization_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "description"
+  end
+
+  add_index "organization_translations", ["locale"], name: "index_organization_translations_on_locale", using: :btree
+  add_index "organization_translations", ["organization_id"], name: "index_organization_translations_on_organization_id", using: :btree
+
+>>>>>>> Adding schmea changes and other files that were left out
   create_table "organizations", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "address"

@@ -21,7 +21,8 @@ class DashboardManifest
     :news_items,
     :talks,
     :votes,
-    :meetups
+    :meetups,
+    :organizations
   ]
 
   # `ROOT_DASHBOARD`
