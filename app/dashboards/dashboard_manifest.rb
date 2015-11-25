@@ -23,7 +23,8 @@ class DashboardManifest
     :votes,
     :meetups,
     :organizations,
-    :pages
+    :pages,
+    :members
   ]
 
   # `ROOT_DASHBOARD`

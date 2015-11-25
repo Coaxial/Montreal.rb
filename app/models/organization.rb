@@ -5,5 +5,6 @@ class Organization < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true
 
   has_many :members
+
   has_many :jobs
 end

@@ -20,6 +20,8 @@ class Event < ActiveRecord::Base
   validates :starts_at, presence: true
   validates :location, presence: true
 
+  has_many :members
+
   def self.published
     order(starts_at: :desc)
   end

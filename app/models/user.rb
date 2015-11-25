@@ -40,5 +40,6 @@ class User < ActiveRecord::Base
       end
     end
   end
->>>>>>> Implement omniauth-github
+
+  has_one :member
 end
