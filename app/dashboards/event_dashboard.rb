@@ -45,8 +45,7 @@ class EventDashboard < Administrate::BaseDashboard
     :conclusion,
     :starts_at,
     :location,
-    :type,
-    :title,
+    :type
   ]
 
   # Overwrite this method to customize how events are displayed
