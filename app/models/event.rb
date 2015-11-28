@@ -13,6 +13,8 @@ class Event < ActiveRecord::Base
   translates :title, :introduction, :conclusion
   belongs_to :location
   has_many :members
+  # suggestion from Nicholas
+  to_param :title
 
   def self.published
     order(starts_at: :desc)
@@ -26,4 +28,11 @@ class Event < ActiveRecord::Base
     date = starts_at.strftime("%B %d")
     [title, date].join(' : ')
   end
+
+  #To change the behaviour in /admin/events/1/edit...
+  # driven by views/fields/enum_field/_show.html.erb
+  def to_s
+    title_with_date
+  end
+
 end
