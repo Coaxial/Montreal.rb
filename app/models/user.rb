@@ -41,5 +41,5 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_one :member
+  belongs_to :member
 end
