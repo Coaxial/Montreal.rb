@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20151204174632) do
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
-    t.string   "email"
+    t.string   "email",          null: false
     t.binary   "picture"
     t.string   "twitter_handle"
     t.string   "github_handle"
